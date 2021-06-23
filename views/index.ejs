@@ -21,18 +21,16 @@
   </head>
   <body>
 
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-md-center list">
       <div class="col-md-5">
-        <nav>
-          <h4 class="navigation"><%= date %></h4>
-        </nav>
+        <h4 class="navigation"><%= date %></h4>
         <% addTask.map((item) => {%>
-       <input type="checkbox" > <p class="items"><%= item %></p>
+       <div class="itemList"><input type="checkbox" > <p class="items"><%= item %></p></div>
         <% })%>
 
         <form action="/" method="post">
-          <input type="text" name="newTask" />
-          <button type="submit">Add Task</button>
+          <input type="text" name="newTask" placeholder="Add New Task" />
+          <button type="submit"><i class="fa fa-plus"></i></button>
         </form>
       </div>
     </div>
@@ -40,6 +38,7 @@
     <footer>
       <div class="row justify-content-md-center">
         <div class="col-md-5">
+          <h6 class="navigation">Joke of the Day</h6>
           <p class="text-center"><%= jokes %></p>
         </div>
       </div>

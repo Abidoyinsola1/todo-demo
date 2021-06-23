@@ -8,7 +8,31 @@ body {
     text-align: center;
 }
 
+.list {
+    margin-bottom: 5%;
+}
+
 .items {
     border-bottom: 1px solid coral;
     padding: 2% 0;
+}
+
+input[type='text'] {
+    min-width: 90%;
+    border: none;
+    padding: 2% 0;
+    border-bottom: 1px solid coral;
+}
+
+button {
+    border: 1px solid coral;
+}
+
+i {
+    color: coral;
+}
+
+input::placeholder {
+    color: coral;
+    text-align: center;
 }
