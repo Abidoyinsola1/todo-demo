@@ -3,13 +3,13 @@ const bodyParser = require('body-parser')
 const https = require('https');
 
 const app = express()
-const port = 3000
+const port = 4000
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-let newTask = []
+let newTask = ['Attend Class', 'Make coffee', 'Write Code']
 
 app.get('/', (req, res) => {
     let today = new Date()
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
         month: 'long'
     }
     const thisDay = today.toLocaleDateString('en-US', options)
-    const url = 'https://v2.jokeapi.dev/joke/Programming,Miscellaneous?blacklistFlags=racist,sexist&type=single'
+    const url = 'https://v2.jokeapi.dev/joke/Programming,Miscellaneous?blacklistFlags=nsfw,racist,sexist&type=single'
     https.get(`${url}`, (response) => {
         response.on("data", (data) => {
             const ourJokes = JSON.parse(data)
@@ -37,7 +37,12 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    newTask.push(req.body.newTask)
+    if (req.body.newTask === '') {
+        res.redirect('/')
+    } else {
+        newTask.push(req.body.newTask)
+    }
+
     res.redirect('/')
 })
 app.listen(port, () => console.log(`Listening on port ${port}`))

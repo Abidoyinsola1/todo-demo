@@ -1,11 +1,14 @@
 body {
-    margin-top: 10%;
+    max-width: 1500px;
+    margin: auto;
+    margin-top: 8%;
 }
 
 .navigation {
     padding: 1%;
     background: coral;
     text-align: center;
+    color: white;
 }
 
 .list {
@@ -13,19 +16,27 @@ body {
 }
 
 .items {
+    margin: -4.5% 0 4% 3%;
     border-bottom: 1px solid coral;
     padding: 2% 0;
+    color: coral;
 }
 
 input[type='text'] {
-    min-width: 90%;
+    min-width: 94.5%;
     border: none;
     padding: 2% 0;
     border-bottom: 1px solid coral;
 }
 
+input[type='checkbox'] {
+    padding-top: .5em;
+}
+
 button {
     border: 1px solid coral;
+    background: none;
+    border-radius: 15%;
 }
 
 i {
@@ -35,4 +46,15 @@ i {
 input::placeholder {
     color: coral;
     text-align: center;
+}
+
+input[type='text']:focus {
+    border: none;
+    outline: none;
+}
+
+input:checked+p {
+    text-decoration: line-through;
+    color: rgba(255, 127, 80, .4);
+    transition: all .5s ease-out;
 }
