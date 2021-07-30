@@ -1,0 +1,26 @@
+<%- include('partials/header.ejs') %>
+
+<div class="row justify-content-md-center list">
+  <div class="col-md-5">
+    <h4 class="navigation"><%= heading %></h4>
+  
+    <% documents.map((item) => { %>
+      <div class="itemList">
+        <input type="checkbox" />
+        <p class="items"><%= item.task %></p>
+      </div>
+   <% })%>
+
+    <form action="/" method="post">
+      <input
+        type="text"
+        name="newTask"
+        placeholder="Add New Task"
+        autocomplete="off"
+      />
+      <button type="submit"><i class="fa fa-plus"></i></button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
