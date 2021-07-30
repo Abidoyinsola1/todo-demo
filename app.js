@@ -32,20 +32,17 @@ addListDB = (taskType, categoryList) => {
     list.save()
 }
 
-
 app.get('/', (req, res) => {
 
-    const url = 'https://v2.jokeapi.dev/joke/Programming,Miscellaneous?blacklistFlags=nsfw,racist,sexist&type=single'
-    https.get(`${url}`, (response) => {
-        response.on("data", (data) => {
-            const ourJokes = JSON.parse(data)
-            var randomJokes = ''
-            randomJokes = ourJokes.joke
+    todoList.find({ category: "personal" }, function (err, docs) {
+        if (err) {
+            console.log(err)
+        } else {
             res.render('personal', {
                 heading: "Personal",
-                jokes: randomJokes
+                documents: docs
             })
-        })
+        }
     })
 
 })
@@ -64,10 +61,18 @@ app.post('/', (req, res) => {
 })
 
 app.get('/work', (req, res) => {
-    res.render('work', {
-        heading: 'Work Tasks',
-        jokes: ''
+
+    todoList.find({ category: "work" }, function (err, docs) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('work', {
+                heading: 'Work Tasks',
+                documents: docs
+            })
+        }
     })
+
 })
 
 app.post('/work', (req, res) => {
@@ -83,5 +88,30 @@ app.post('/work', (req, res) => {
     res.redirect('/work')
 })
 
+app.get('/family', (req, res) => {
+    todoList.find({ category: "family" }, function (err, docs) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('family', {
+                heading: 'Family Tasks',
+                documents: docs
+            })
+        }
+    })
+})
+
+app.post('/family', (req, res) => {
+    const familyTask = req.body.familyTask
+    const categoryType = 'family'
+
+    if (familyTask == '') {
+        console.log('Add a valid task')
+    } else {
+        addListDB(familyTask, categoryType)
+    }
+
+    res.redirect('/family')
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
